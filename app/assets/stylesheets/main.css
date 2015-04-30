@@ -21,3 +21,15 @@
 	border-radius: 50px;
 	font-size: 20px;
 }
+
+.alert-type{
+	background-color: red;
+	padding: 5px;
+
+}
+
+.notice-type{
+	background-color:green;
+	padding: 5px;
+}
+
