@@ -5,24 +5,8 @@
 <div class="row">
 	<div class="col-md-4 col-md-offset-4">
 		<div id="alert" class="text-center">
-			<% flash.each do |type, message| -%>
-				<div class="<%= type %>-type text-center">
-					<%= message %>
-				</div>
-			<% end -%>
 		</div>
 	</div>
-</div>
-
-<div class="container">
-	<% if @rule.errors.any? %>
-		<%= pluralize(@rule.errors.count, "error") + " prohibited this rule from being saved:" %>
-		<ul>
-			<% @rule.errors.full_messages.each do |message| %>
-				<li><%= message %></li>
-			<% end %>
-		</ul>
-	<% end %>
 </div>
 
 <div class="container">
@@ -36,7 +20,14 @@
 	<div class="row">
 		<div class="col-md-3 col-md-offset-3">
 			<h3>Base Wage</h3>
-			<div id="base-wage-display">$0/hr</div>
+			<div id="base-wage-display">$0/hr
+			<label class="pull-right">Increase
+				<input class="modifier" type="checkbox" id="increase">
+			</label>
+			<label class="pull-right">Decrease
+				<input class="modifier" type="checkbox" id="decrease">
+			</label>
+			</div>
 			<input type="text" id="base-wage-input" class="form-control">
 			<div>&nbsp;</div>
 			<button id="change-base-wage" class="btn btn-default">Change Base Wage</button>
@@ -45,22 +36,20 @@
 		<div class="col-md-3">
 			<h3>Select Rule</h3>
 			<div>&nbsp;</div>
-			<select class="form-control">
-				<% @rules.each do |rule| -%>
-					<option><%= '$' + rule.cost_modifier + ' ' + rule.description%></option>
-				<% end -%>
+			<select class="form-control" id="rule-select">
 			</select>
+			<div>&nbsp;</div>
+			<button id="adjust-wage" class="btn btn-default">Adjust Wage</button>
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-md-6 rule-form col-md-offset-3">
 			<h3>Add Rule</h3>
-			<%= simple_form_for @rule do |f| %>
-			  <%= f.input :description, required: false %>
-			  <%= f.input :cost_modifier, required: false %>
-			  <%= f.button :submit %>
-			<% end %>
+			<label>Description</label>
+			<input type="text" id="description-input">
+			<input type="text" id="price-input">
+			<button class="btn btn-default" id="add-rule">Add Rule</button>
 		</div>
 	</div>
 </div>
