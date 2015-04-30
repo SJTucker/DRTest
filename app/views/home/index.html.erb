@@ -2,11 +2,13 @@
 	<h1 class="text-center header">Wage Calculator</h1>
 </div>
 
-<% flash.each do |type, message| -%>
-	<div class="alert alert-#{type} text-center">
-		<%= message %>
-	</div>
-<% end -%>
+<div id="alert" class="text-center">
+	<% flash.each do |message| -%>
+		<div class="alert alert-#{type} text-center">
+			<%= message %>
+		</div>
+	<% end -%>
+</div>
 
 <div class="container">
 	<% if @rule.errors.any? %>
@@ -21,29 +23,46 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-3">
-			<h3>Base Wage</h3>
-			<div class="base-wage">$200/hr</div>
+		<div class="col-md-4"></div>
+		<div class="col-md-4 text-center">
+			<h2>Adjusted Wage</h2>
+			<div id="wage-display">$0/hr</div>
 		</div>
+		<div class="col-md-4"></div>
 	</div>
 
 	<div class="row">
+		<div class="col-md-3"></div>
 		<div class="col-md-3">
-			<h3>Add Rule</h3>
-			<%= simple_form_for @rule do |f| %>
-			  <%= f.input :description %>
-			  <%= f.input :cost_modifier %>
-			  <%= f.button :submit %>
-			<% end %>
+			<h3>Base Wage</h3>
+			<div id="base-wage-display">$0/hr</div>
+			<input type="text" id="base-wage-input" class="form-control">
+			<div>&nbsp;</div>
+			<button id="change-base-wage" class="btn btn-default">Change Base Wage</button>
 		</div>
 
 		<div class="col-md-3">
 			<h3>Select Rule</h3>
-			<select>
+			<div>&nbsp;</div>
+			<select class="form-control">
 				<% @rules.each do |rule| -%>
 					<option><%= '$' + rule.cost_modifier + ' ' + rule.description%></option>
 				<% end -%>
 			</select>
+			<div class="col-md-3"></div>
 		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6 rule-form">
+			<h3>Add Rule</h3>
+			<%= simple_form_for @rule do |f| %>
+			  <%= f.input :description, required: false %>
+			  <%= f.input :cost_modifier, required: false %>
+			  <%= f.button :submit %>
+			<% end %>
+		</div>
+		<div class="col-md-3"></div>
 	</div>
 </div>
