@@ -2,12 +2,16 @@
 	<h1 class="text-center header">Wage Calculator</h1>
 </div>
 
-<div id="alert" class="text-center">
-	<% flash.each do |message| -%>
-		<div class="alert alert-#{type} text-center">
-			<%= message %>
+<div class="row">
+	<div class="col-md-4 col-md-offset-4">
+		<div id="alert" class="text-center">
+			<% flash.each do |type, message| -%>
+				<div class="<%= type %>-type text-center">
+					<%= message %>
+				</div>
+			<% end -%>
 		</div>
-	<% end -%>
+	</div>
 </div>
 
 <div class="container">
