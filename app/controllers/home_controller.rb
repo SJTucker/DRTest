@@ -11,6 +11,7 @@ class HomeController < ApplicationController
 			redirect_to root_path
 		else
 			flash[:alert] = "Rule could not be created"
+			#HACK: this is kinda dumb, but it was easy to pass the instance variable back this way
 			@rules = Rule.all
 			render :index
 		end
