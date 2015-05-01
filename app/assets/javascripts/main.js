@@ -15,6 +15,7 @@ var baseWage = 0;
 var adjustedWage = 0;
 var rules = [];
 var rule = {};
+var modifier = '';
 
 function changeBaseWage() {
 	baseWage = $('#base-wage-input').val()*1;
@@ -30,9 +31,11 @@ function changeBaseWage() {
 };
 
 function recalculateBaseWage() {
-	for (i = 0; i < rules.length; i++) {
-		adjustedWage = baseWage + rules[i];
+	adjustedWage = 0;
+	for (var i = 0; i < rules.length; i++) {
+		rules[i].modifier_function();
 	}
+	displayWage();
 };
 
 function adjustWage() {
@@ -43,6 +46,7 @@ function adjustWage() {
 function modify() {
 	if($(this).attr('id') === 'decrease'){
 		modifier_function = decreaseWage;
+		modifier = '-';
 	}else{
 		modifier_function = increaseWage;
 	};
@@ -53,9 +57,8 @@ function addRule() {
 	rule.price = $('#price-input').val()*1;
 	rule.modifier_function = modifier_function;
 
-	var modifier = '';
-	if(modifier_function === 'decreaseWage()'){
-		modifier = '-';
+	if(!rule.price || !rule.description){
+		$('#alert').text('Rule could not be created.  Rule must have description and price.')
 	}
 
 	$('#rule-select').append('<option class="rule-options" value="' + rule + '">' + modifier + '$' + rule.price + ' ' + rule.description + '</option>');
@@ -65,11 +68,12 @@ function addRule() {
 
 function increaseWage() {
 	if(adjustedWage === 0){
-		adjustedWage = baseWage + rule.price
+		adjustedWage = baseWage + rule.price;
 	}else{
-		adjustedWage += rule.price
+		adjustedWage += rule.price;
 	}
-}
+	return adjustedWage;
+};
 
 function decreaseWage() {
 	if(adjustedWage === 0){
@@ -77,11 +81,12 @@ function decreaseWage() {
 	}else{
 		adjustedWage -= rule.price
 	}
-}
+	return adjustedWage;
+};
 
 function changeRule() {
 	rule = this.val();
-}
+};
 
 function displayWage() {
 	if(adjustedWage > 0){
@@ -91,18 +96,4 @@ function displayWage() {
 	if(adjustedWage < 0){
 		$('#alert').text('Cannot adjust wage.  Negative Number.')
 	}
-}
-
-/*if(adjustedWage === 0){
-		adjustedWage = (baseWage*1) + ((rule.modifier + rule.price)*1)
-	}else{
-		adjustedWage += ((rule.modifier + rule.price)*1)
-	}
-
-	if(adjustedWage > 0){
-		$('#wage-display').text('$' + adjustedWage + '/hr');
-	}
-
-	if(adjustedWage < 0){
-		$('#alert').text('Cannot adjust wage.  Negative Number.')
-	}*/
+};
