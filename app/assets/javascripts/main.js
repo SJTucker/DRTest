@@ -30,6 +30,7 @@ function changeBaseWage() {
 	}
 };
 
+//This function will recalculate the adjusted wage when the base wage is changed after rules have been added
 function recalculateBaseWage() {
 	adjustedWage = 0;
 	for (var i = 0; i < rules.length; i++) {
