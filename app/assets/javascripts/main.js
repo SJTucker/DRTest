@@ -26,7 +26,7 @@ function changeBaseWage() {
 		$('#base-wage-display').text('$' + baseWage + '/hr');
 		recalculateBaseWage();
   }else{
-		$('#alert').text('Rule could not be created.  Not a number.')
+		$('#alert').text('Could not set base wage.  Not a number.')
 	}
 };
 
