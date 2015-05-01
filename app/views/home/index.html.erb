@@ -20,14 +20,7 @@
 	<div class="row">
 		<div class="col-md-3 col-md-offset-3">
 			<h3>Base Wage</h3>
-			<div id="base-wage-display">$0/hr
-			<label class="pull-right">Increase
-				<input class="modifier" type="checkbox" id="increase">
-			</label>
-			<label class="pull-right">Decrease
-				<input class="modifier" type="checkbox" id="decrease">
-			</label>
-			</div>
+			<div id="base-wage-display">$0/hr</div>
 			<input type="text" id="base-wage-input" class="form-control">
 			<div>&nbsp;</div>
 			<button id="change-base-wage" class="btn btn-default">Change Base Wage</button>
@@ -46,9 +39,20 @@
 	<div class="row">
 		<div class="col-md-6 rule-form col-md-offset-3">
 			<h3>Add Rule</h3>
-			<label>Description</label>
-			<input type="text" id="description-input">
-			<input type="text" id="price-input">
+			<div>
+				<label>Increase
+					<input class="modifier" name="modifier" checked="checked" multiple=false type="radio" id="increase">
+				</label>
+				<label>Decrease
+					<input class="modifier" name="modifier" multiple=false type="radio" id="decrease">
+				</label>
+			</div>
+			<label>Description
+				<input type="text" id="description-input" class="form-control">
+			</label>
+			<label>Price
+				<input type="text" id="price-input" class="form-control">
+			</label>
 			<button class="btn btn-default" id="add-rule">Add Rule</button>
 		</div>
 	</div>
